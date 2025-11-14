@@ -1,1 +1,3 @@
-alert('hello')
+import { a } from './incubaato';
+
+alert('hello ' + a)
