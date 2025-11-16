@@ -1,4 +1,6 @@
-import { a } from './incubaato';
+import { a} from './incubaato';
 
-alert('hello ' + a)
-console.log('hello ' + a) 
+const b = a
+
+alert('hello ' + b)
+console.log('hello ' + b);
