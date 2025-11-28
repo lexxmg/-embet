@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Webflow Embed - No Clipboard Method</title>
+    <style>
+        body { padding: 40px; font-family: -apple-system, sans-serif; }
+        #copyArea { 
+            width: 100%; 
+            height: 300px; 
+            padding: 20px; 
+            border: 2px solid #007cba; 
+            border-radius: 8px; 
+            font-family: monospace;
+            background: #f8f9fa;
+            margin: 20px 0;
+        }
+        button { padding: 15px 30px; font-size: 16px; background: #007cba; color: white; border: none; border-radius: 8px; cursor: pointer; margin: 10px; }
+        .instructions { background: #e8f4fd; padding: 20px; border-radius: 8px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <h1>🚀 Webflow Auto Embed (Localhost Safe)</h1>
+    
+    <div class="instructions">
+        <h3>📋 Инструкция для локального сервера:</h3>
+        <ol>
+            <li>Нажмите кнопку "Generate Code"</li>
+            <li>Выделите весь текст в синем поле</li>
+            <li>Нажмите <strong>Cmd+C</strong> (Mac) или <strong>Ctrl+C</strong> (Windows)</li>
+            <li>Перейдите в Webflow Designer</li>
+            <li>Нажмите <strong>Cmd+V</strong> (Mac) или <strong>Ctrl+V</strong> (Windows)</li>
+        </ol>
+    </div>
+
+    <button onclick="generateWebflowCode()">⚡ Generate Webflow Code</button>
+    <button onclick="selectAllText()">🔍 Select All Text</button>
+
+    <div id="copyArea" contenteditable="true">
+        <!-- Сюда будет вставлен код -->
+    </div>
+
+    <script>
+        function generateWebflowCode() {
+            const webflowData = {
+                "type": "@webflow/XscpData",
+                "payload": {
+                    "nodes": [{
+                        "_id": "embed-" + Date.now(),
+                        "type": "HtmlEmbed",
+                        "tag": "div",
+                        "classes": [],
+                        "children": [],
+                        "v": `<div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 40px; border-radius: 12px; text-align: center; font-family: -apple-system, sans-serif;">
+                            <h2>🎉 Успех с Localhost!</h2>
+                            <p>Этот Embed создался через ручное копирование</p>
+                            <button style="background: white; color: #667eea; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; margin-top: 15px;">
+                                Тестовая кнопка
+                            </button>
+                        </div>`,
+                        "data": {
+                            "search": {"exclude": true},
+                            "embed": {
+                                "type": "html",
+                                "meta": {
+                                    "html": `<div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 40px; border-radius: 12px; text-align: center; font-family: -apple-system, sans-serif;">
+                                        <h2>🎉 Успех с Localhost!</h2>
+                                        <p>Этот Embed создался через ручное копирование</p>
+                                        <button style="background: white; color: #667eea; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; margin-top: 15px;">
+                                            Тестовая кнопка
+                                        </button>
+                                    </div>`,
+                                    "div": false,
+                                    "iframe": false,
+                                    "script": false,
+                                    "compilable": false
+                                }
+                            },
+                            "insideRTE": false
+                        }
+                    }],
+                    "styles": [],
+                    "assets": [],
+                    "ix1": [],
+                    "ix2": {"interactions": [], "events": [], "actionLists": []}
+                },
+                "meta": {
+                    "unlinkedSymbolCount": 0,
+                    "droppedLinks": 0,
+                    "dynBindRemovedCount": 0,
+                    "dynListBindRemovedCount": 0,
+                    "paginationRemovedCount": 0,
+                    "universalBindingsRemovedCount": 0
+                }
+            };
+
+            const copyArea = document.getElementById('copyArea');
+            copyArea.textContent = JSON.stringify(webflowData, null, 2);
+            
+            alert('✅ Код сгенерирован! Выделите текст в поле выше и скопируйте вручную (Cmd+C)');
+        }
+
+        function selectAllText() {
+            const copyArea = document.getElementById('copyArea');
+            const range = document.createRange();
+            range.selectNodeContents(copyArea);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            
+            alert('Текст выделен! Теперь нажмите Cmd+C для копирования');
+        }
+
+        // Автоматически генерируем код при загрузке
+        generateWebflowCode();
+    </script>
+</body>
+</html>
